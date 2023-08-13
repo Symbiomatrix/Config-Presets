@@ -14,8 +14,6 @@ CONFIG_IMG2IMG_CUSTOM_TRACKED_COMPONENTS_FILE_NAME = "config-img2img-custom-trac
 CONFIG_TXT2IMG_FILE_NAME = "config-txt2img.json"
 CONFIG_IMG2IMG_FILE_NAME = "config-img2img.json"
 
-#fields_checkboxgroup = None
-
 
 def load_txt2img_custom_tracked_component_ids() -> list[str]:
     txt2img_custom_tracked_components_ids = []
@@ -32,8 +30,8 @@ def load_txt2img_custom_tracked_component_ids() -> list[str]:
         # First time running the extension or it was deleted, so fill it with default values
         txt2img_custom_tracked_components_default_text = """# Put custom txt2img tracked component IDs here. This will allow those fields to be saved as a config preset.
 # Lines starting with a # are ignored.
-# Component IDs can be found in the HTML (id="...") or in modules/ui.py (elem_id="..."). IDs like "component-5890" won't work because the number at the end will change each startup.
-# Entering an invalid component ID here will cause this extension to error and not load.
+# Component IDs can be found in the HTML (id="..."), in modules/ui.py (elem_id="..."), or in an extensions python code. IDs like "component-5890" won't work because the number at the end will change each startup.
+# Entering an invalid component ID here will cause this extension to error and not load. Components that do not have a value associated with them, such as tabs and accordions, are not supported.
 # Note that components on the top row of the UI cannot be added here, such as "setting_sd_model_checkpoint", "setting_sd_vae", and "setting_CLIP_stop_at_last_layers".
 
 # Other fields:
@@ -48,6 +46,9 @@ def load_txt2img_custom_tracked_component_ids() -> list[str]:
 #txt2img_tiling
 #txt2img_hr_resize_x
 #txt2img_hr_resize_y
+#hr_sampler
+#hires_prompt
+#hires_neg_prompt
 
 # Script dropdown:
 #script_list
@@ -65,6 +66,168 @@ def load_txt2img_custom_tracked_component_ids() -> list[str]:
 #cd_txt2img_positions
 #cd_txt2img_weights
 #cd_txt2img_end_at_this_step
+
+# ControlNet (extension):
+#txt2img_controlnet_ControlNet-0_controlnet_enable_checkbox
+#txt2img_controlnet_ControlNet-0_controlnet_low_vram_checkbox
+#txt2img_controlnet_ControlNet-0_controlnet_pixel_perfect_checkbox
+#txt2img_controlnet_ControlNet-0_controlnet_preprocessor_preview_checkbox
+#txt2img_controlnet_ControlNet-0_controlnet_preprocessor_dropdown
+#txt2img_controlnet_ControlNet-0_controlnet_model_dropdown
+#txt2img_controlnet_ControlNet-0_controlnet_control_weight_slider
+#txt2img_controlnet_ControlNet-0_controlnet_start_control_step_slider
+#txt2img_controlnet_ControlNet-0_controlnet_ending_control_step_slider
+#txt2img_controlnet_ControlNet-0_controlnet_control_mode_radio
+#txt2img_controlnet_ControlNet-0_controlnet_resize_mode_radio
+#txt2img_controlnet_ControlNet-0_controlnet_automatically_send_generated_images_checkbox
+
+#txt2img_controlnet_ControlNet-1_controlnet_enable_checkbox
+#txt2img_controlnet_ControlNet-1_controlnet_low_vram_checkbox
+#txt2img_controlnet_ControlNet-1_controlnet_pixel_perfect_checkbox
+#txt2img_controlnet_ControlNet-1_controlnet_preprocessor_preview_checkbox
+#txt2img_controlnet_ControlNet-1_controlnet_preprocessor_dropdown
+#txt2img_controlnet_ControlNet-1_controlnet_model_dropdown
+#txt2img_controlnet_ControlNet-1_controlnet_control_weight_slider
+#txt2img_controlnet_ControlNet-1_controlnet_start_control_step_slider
+#txt2img_controlnet_ControlNet-1_controlnet_ending_control_step_slider
+#txt2img_controlnet_ControlNet-1_controlnet_control_mode_radio
+#txt2img_controlnet_ControlNet-1_controlnet_resize_mode_radio
+#txt2img_controlnet_ControlNet-1_controlnet_automatically_send_generated_images_checkbox
+
+#txt2img_controlnet_ControlNet-2_controlnet_enable_checkbox
+#txt2img_controlnet_ControlNet-2_controlnet_low_vram_checkbox
+#txt2img_controlnet_ControlNet-2_controlnet_pixel_perfect_checkbox
+#txt2img_controlnet_ControlNet-2_controlnet_preprocessor_preview_checkbox
+#txt2img_controlnet_ControlNet-2_controlnet_preprocessor_dropdown
+#txt2img_controlnet_ControlNet-2_controlnet_model_dropdown
+#txt2img_controlnet_ControlNet-2_controlnet_control_weight_slider
+#txt2img_controlnet_ControlNet-2_controlnet_start_control_step_slider
+#txt2img_controlnet_ControlNet-2_controlnet_ending_control_step_slider
+#txt2img_controlnet_ControlNet-2_controlnet_control_mode_radio
+#txt2img_controlnet_ControlNet-2_controlnet_resize_mode_radio
+#txt2img_controlnet_ControlNet-2_controlnet_automatically_send_generated_images_checkbox
+
+# Tiled Diffusion (extension)
+#MD-t2i-enabled
+#MD-t2i-overwrite-image-size
+#MD-overwrite-width-t2i
+#MD-overwrite-height-t2i
+#MD-t2i-method
+#MD-t2i-control-tensor-cpu
+#MD-t2i-latent-tile-width
+#MD-t2i-latent-tile-height
+#MD-t2i-latent-tile-overlap
+#MD-t2i-latent-tile-batch-size
+# Tiled Diffusion - Region Prompt Control
+#MD-t2i-enable-bbox-control
+#MD-t2i-draw-background
+#MD-t2i-cfg-name
+# Tiled Diffusion - Region Prompt Control - Region 1
+#MD-bbox-t2i-0-enable
+#MD-t2i-0-blend-mode
+#MD-t2i-0-feather
+#MD-t2i-0-x
+#MD-t2i-0-y
+#MD-t2i-0-w
+#MD-t2i-0-h
+#MD-t2i-0-prompt
+#MD-t2i-0-neg-prompt
+#MD-t2i-0-seed
+# Tiled Diffusion - Region Prompt Control - Region 2
+#MD-bbox-t2i-1-enable
+#MD-t2i-1-blend-mode
+#MD-t2i-1-feather
+#MD-t2i-1-x
+#MD-t2i-1-y
+#MD-t2i-1-w
+#MD-t2i-1-h
+#MD-t2i-1-prompt
+#MD-t2i-1-neg-prompt
+#MD-t2i-1-seed
+# Tiled Diffusion - Region Prompt Control - Region 3
+#MD-bbox-t2i-2-enable
+#MD-t2i-2-blend-mode
+#MD-t2i-2-feather
+#MD-t2i-2-x
+#MD-t2i-2-y
+#MD-t2i-2-w
+#MD-t2i-2-h
+#MD-t2i-2-prompt
+#MD-t2i-2-neg-prompt
+#MD-t2i-2-seed
+# Tiled Diffusion - Tiled VAE
+#tiledvae-t2i-enable
+#tiledvae-t2i-vae2gpu
+#tiledvae-t2i-enc-size
+#tiledvae-t2i-dec-size
+#tiledvae-t2i-fastenc
+#tiledvae-t2i-fastenc-colorfix
+#tiledvae-t2i-fastdec
+
+# ADetailer (extension)
+#script_txt2img_adetailer_ad_enable
+# ADetailer - 1st tab
+#script_txt2img_adetailer_ad_model
+#script_txt2img_adetailer_ad_prompt
+#script_txt2img_adetailer_ad_negative_prompt
+# ADetailer - 1st tab - Detection
+#script_txt2img_adetailer_ad_confidence
+#script_txt2img_adetailer_ad_mask_min_ratio
+#script_txt2img_adetailer_ad_mask_max_ratio
+# ADetailer - 1st tab - Mask Preprocessing
+#script_txt2img_adetailer_ad_x_offset
+#script_txt2img_adetailer_ad_y_offset
+#script_txt2img_adetailer_ad_dilate_erode
+#script_txt2img_adetailer_ad_mask_merge_invert
+# ADetailer - 1st tab - Inpainting
+#script_txt2img_adetailer_ad_mask_blur
+#script_txt2img_adetailer_ad_denoising_strength
+#script_txt2img_adetailer_ad_inpaint_full_res
+#script_txt2img_adetailer_ad_inpaint_full_res_padding
+#script_txt2img_adetailer_ad_use_inpaint_width_height
+#script_txt2img_adetailer_ad_inpaint_width
+#script_txt2img_adetailer_ad_inpaint_height
+#script_txt2img_adetailer_ad_use_steps
+#script_txt2img_adetailer_ad_steps
+#script_txt2img_adetailer_ad_use_cfg_scale
+#script_txt2img_adetailer_ad_cfg_scale
+#script_txt2img_adetailer_ad_restore_face
+# ADetailer - 1st tab - ControlNet
+#script_txt2img_adetailer_ad_controlnet_model
+#script_txt2img_adetailer_ad_controlnet_weight
+#script_txt2img_adetailer_ad_controlnet_guidance_start
+#script_txt2img_adetailer_ad_controlnet_guidance_end
+# ADetailer - 2nd tab
+#script_txt2img_adetailer_ad_model_2nd
+#script_txt2img_adetailer_ad_prompt_2nd
+#script_txt2img_adetailer_ad_negative_prompt_2nd
+# ADetailer - 2nd tab - Detection
+#script_txt2img_adetailer_ad_confidence_2nd
+#script_txt2img_adetailer_ad_mask_min_ratio_2nd
+#script_txt2img_adetailer_ad_mask_max_ratio_2nd
+# ADetailer - 2nd tab - Mask Preprocessing
+#script_txt2img_adetailer_ad_x_offset_2nd
+#script_txt2img_adetailer_ad_y_offset_2nd
+#script_txt2img_adetailer_ad_dilate_erode_2nd
+#script_txt2img_adetailer_ad_mask_merge_invert_2nd
+# ADetailer - 2nd tab - Inpainting
+#script_txt2img_adetailer_ad_mask_blur_2nd
+#script_txt2img_adetailer_ad_denoising_strength_2nd
+#script_txt2img_adetailer_ad_inpaint_full_res_2nd
+#script_txt2img_adetailer_ad_inpaint_full_res_padding_2nd
+#script_txt2img_adetailer_ad_use_inpaint_width_height_2nd
+#script_txt2img_adetailer_ad_inpaint_width_2nd
+#script_txt2img_adetailer_ad_inpaint_height_2nd
+#script_txt2img_adetailer_ad_use_steps_2nd
+#script_txt2img_adetailer_ad_steps_2nd
+#script_txt2img_adetailer_ad_use_cfg_scale_2nd
+#script_txt2img_adetailer_ad_cfg_scale_2nd
+#script_txt2img_adetailer_ad_restore_face_2nd
+# ADetailer - 2nd tab - ControlNet
+#script_txt2img_adetailer_ad_controlnet_model_2nd
+#script_txt2img_adetailer_ad_controlnet_weight_2nd
+#script_txt2img_adetailer_ad_controlnet_guidance_start_2nd
+#script_txt2img_adetailer_ad_controlnet_guidance_end_2nd
 """
 
         write_text_to_file(txt2img_custom_tracked_components_default_text, CONFIG_TXT2IMG_CUSTOM_TRACKED_COMPONENTS_FILE_NAME)
@@ -89,8 +252,8 @@ def load_img2img_custom_tracked_component_ids() -> list[str]:
         # First time running the extension or it was deleted, so fill it with default values
         img2img_custom_tracked_components_ids = """# Put custom img2img tracked component IDs here. This will allow those fields to be saved as a config preset.
 # Lines starting with a # are ignored.
-# Component IDs can be found in the HTML (id="...") or in modules/ui.py (elem_id="..."). IDs like "component-5890" won't work because the number at the end will change each startup.
-# Entering an invalid component ID here will cause this extension to error and not load.
+# Component IDs can be found in the HTML (id="..."), in modules/ui.py (elem_id="..."), or in an extensions python code. IDs like "component-5890" won't work because the number at the end will change each startup.
+# Entering an invalid component ID here will cause this extension to error and not load. Components that do not have a value associated with them, such as tabs and accordions, are not supported.
 # Note that components on the top row of the UI cannot be added here, such as "setting_sd_model_checkpoint", "setting_sd_vae", and "setting_CLIP_stop_at_last_layers".
 
 # Other fields:
@@ -103,13 +266,13 @@ def load_img2img_custom_tracked_component_ids() -> list[str]:
 #img2img_inpaint_full_res
 #img2img_inpaint_full_res_padding
 #resize_mode
+#img2img_scale
 #img2img_seed
 #img2img_subseed_show
 #img2img_subseed
 #img2img_subseed_strength
 #img2img_seed_resize_from_w
 #img2img_seed_resize_from_h
-#img2img_restore_faces
 #img2img_tiling
 #img2img_batch_input_dir
 #img2img_batch_output_dir
@@ -119,12 +282,12 @@ def load_img2img_custom_tracked_component_ids() -> list[str]:
 #script_list
 
 # X/Y/Z plot (script):
-#script_img2txt_xyz_plot_x_type
-#script_img2txt_xyz_plot_y_type
-#script_img2txt_xyz_plot_z_type
-#script_img2txt_xyz_plot_x_values
-#script_img2txt_xyz_plot_y_values
-#script_img2txt_xyz_plot_z_values
+#script_img2img_xyz_plot_x_type
+#script_img2img_xyz_plot_y_type
+#script_img2img_xyz_plot_z_type
+#script_img2img_xyz_plot_x_values
+#script_img2img_xyz_plot_y_values
+#script_img2img_xyz_plot_z_values
 
 # Loopback (script):
 #script_loopback_loops
@@ -140,6 +303,181 @@ def load_img2img_custom_tracked_component_ids() -> list[str]:
 #cd_img2img_positions
 #cd_img2img_weights
 #cd_img2img_end_at_this_step
+
+# ControlNet (extension):
+#img2img_controlnet_ControlNet-0_controlnet_enable_checkbox
+#img2img_controlnet_ControlNet-0_controlnet_low_vram_checkbox
+#img2img_controlnet_ControlNet-0_controlnet_pixel_perfect_checkbox
+#img2img_controlnet_ControlNet-0_controlnet_preprocessor_preview_checkbox
+#img2img_controlnet_ControlNet-0_controlnet_preprocessor_dropdown
+#img2img_controlnet_ControlNet-0_controlnet_model_dropdown
+#img2img_controlnet_ControlNet-0_controlnet_control_weight_slider
+#img2img_controlnet_ControlNet-0_controlnet_start_control_step_slider
+#img2img_controlnet_ControlNet-0_controlnet_ending_control_step_slider
+#img2img_controlnet_ControlNet-0_controlnet_control_mode_radio
+#img2img_controlnet_ControlNet-0_controlnet_resize_mode_radio
+#img2img_controlnet_ControlNet-0_controlnet_automatically_send_generated_images_checkbox
+
+#img2img_controlnet_ControlNet-1_controlnet_enable_checkbox
+#img2img_controlnet_ControlNet-1_controlnet_low_vram_checkbox
+#img2img_controlnet_ControlNet-1_controlnet_pixel_perfect_checkbox
+#img2img_controlnet_ControlNet-1_controlnet_preprocessor_preview_checkbox
+#img2img_controlnet_ControlNet-1_controlnet_preprocessor_dropdown
+#img2img_controlnet_ControlNet-1_controlnet_model_dropdown
+#img2img_controlnet_ControlNet-1_controlnet_control_weight_slider
+#img2img_controlnet_ControlNet-1_controlnet_start_control_step_slider
+#img2img_controlnet_ControlNet-1_controlnet_ending_control_step_slider
+#img2img_controlnet_ControlNet-1_controlnet_control_mode_radio
+#img2img_controlnet_ControlNet-1_controlnet_resize_mode_radio
+#img2img_controlnet_ControlNet-1_controlnet_automatically_send_generated_images_checkbox
+
+#img2img_controlnet_ControlNet-2_controlnet_enable_checkbox
+#img2img_controlnet_ControlNet-2_controlnet_low_vram_checkbox
+#img2img_controlnet_ControlNet-2_controlnet_pixel_perfect_checkbox
+#img2img_controlnet_ControlNet-2_controlnet_preprocessor_preview_checkbox
+#img2img_controlnet_ControlNet-2_controlnet_preprocessor_dropdown
+#img2img_controlnet_ControlNet-2_controlnet_model_dropdown
+#img2img_controlnet_ControlNet-2_controlnet_control_weight_slider
+#img2img_controlnet_ControlNet-2_controlnet_start_control_step_slider
+#img2img_controlnet_ControlNet-2_controlnet_ending_control_step_slider
+#img2img_controlnet_ControlNet-2_controlnet_control_mode_radio
+#img2img_controlnet_ControlNet-2_controlnet_resize_mode_radio
+#img2img_controlnet_ControlNet-2_controlnet_automatically_send_generated_images_checkbox
+
+# Tiled Diffusion (extension)
+#MD-i2i-enabled
+#MD-i2i-keep-input-size
+#MD-i2i-method
+#MD-i2i-control-tensor-cpu
+#MD-i2i-latent-tile-width
+#MD-i2i-latent-tile-height
+#MD-i2i-latent-tile-overlap
+#MD-i2i-latent-tile-batch-size
+#MD-i2i-upscaler-index
+#MD-i2i-upscaler-factor
+# Tiled Diffusion - Noise Inversion
+#MD-i2i-noise-inverse
+#MD-i2i-noise-inverse-steps
+#MD-i2i-noise-inverse-retouch
+#MD-i2i-noise-inverse-renoise-strength
+#MD-i2i-noise-inverse-renoise-kernel
+# Tiled Diffusion - Region Prompt Control
+#MD-i2i-enable-bbox-control
+#MD-i2i-draw-background
+#MD-i2i-cfg-name
+# Tiled Diffusion - Region Prompt Control - Region 1
+#MD-bbox-i2i-0-enable
+#MD-i2i-0-blend-mode
+#MD-i2i-0-feather
+#MD-i2i-0-x
+#MD-i2i-0-y
+#MD-i2i-0-w
+#MD-i2i-0-h
+#MD-i2i-0-prompt
+#MD-i2i-0-neg-prompt
+#MD-i2i-0-seed
+# Tiled Diffusion - Region Prompt Control - Region 2
+#MD-bbox-i2i-1-enable
+#MD-i2i-1-blend-mode
+#MD-i2i-1-feather
+#MD-i2i-1-x
+#MD-i2i-1-y
+#MD-i2i-1-w
+#MD-i2i-1-h
+#MD-i2i-1-prompt
+#MD-i2i-1-neg-prompt
+#MD-i2i-1-seed
+# Tiled Diffusion - Region Prompt Control - Region 3
+#MD-bbox-i2i-2-enable
+#MD-i2i-2-blend-mode
+#MD-i2i-2-feather
+#MD-i2i-2-x
+#MD-i2i-2-y
+#MD-i2i-2-w
+#MD-i2i-2-h
+#MD-i2i-2-prompt
+#MD-i2i-2-neg-prompt
+#MD-i2i-2-seed
+# Tiled Diffusion - Tiled VAE
+#tiledvae-i2i-enable
+#tiledvae-i2i-vae2gpu
+#tiledvae-i2i-enc-size
+#tiledvae-i2i-dec-size
+#tiledvae-i2i-fastenc
+#tiledvae-i2i-fastenc-colorfix
+#tiledvae-i2i-fastdec
+
+# StableSR (extension)
+#SR Model does not have an ID as of June 1 2023
+#StableSR-scale
+#StableSR-color-fix
+#StableSR-save-original
+#StableSR-pure-noise
+
+# ADetailer (extension)
+#script_img2img_adetailer_ad_enable
+# ADetailer - 1st tab
+#script_img2img_adetailer_ad_model
+#script_img2img_adetailer_ad_prompt
+#script_img2img_adetailer_ad_negative_prompt
+# ADetailer - 1st tab - Detection
+#script_img2img_adetailer_ad_confidence
+#script_img2img_adetailer_ad_mask_min_ratio
+#script_img2img_adetailer_ad_mask_max_ratio
+# ADetailer - 1st tab - Mask Preprocessing
+#script_img2img_adetailer_ad_x_offset
+#script_img2img_adetailer_ad_y_offset
+#script_img2img_adetailer_ad_dilate_erode
+#script_img2img_adetailer_ad_mask_merge_invert
+# ADetailer - 1st tab - Inpainting
+#script_img2img_adetailer_ad_mask_blur
+#script_img2img_adetailer_ad_denoising_strength
+#script_img2img_adetailer_ad_inpaint_full_res
+#script_img2img_adetailer_ad_inpaint_full_res_padding
+#script_img2img_adetailer_ad_use_inpaint_width_height
+#script_img2img_adetailer_ad_inpaint_width
+#script_img2img_adetailer_ad_inpaint_height
+#script_img2img_adetailer_ad_use_steps
+#script_img2img_adetailer_ad_steps
+#script_img2img_adetailer_ad_use_cfg_scale
+#script_img2img_adetailer_ad_cfg_scale
+#script_img2img_adetailer_ad_restore_face
+# ADetailer - 1st tab - ControlNet
+#script_img2img_adetailer_ad_controlnet_model
+#script_img2img_adetailer_ad_controlnet_weight
+#script_img2img_adetailer_ad_controlnet_guidance_start
+#script_img2img_adetailer_ad_controlnet_guidance_end
+# ADetailer - 2nd tab
+#script_img2img_adetailer_ad_model_2nd
+#script_img2img_adetailer_ad_prompt_2nd
+#script_img2img_adetailer_ad_negative_prompt_2nd
+# ADetailer - 2nd tab - Detection
+#script_img2img_adetailer_ad_confidence_2nd
+#script_img2img_adetailer_ad_mask_min_ratio_2nd
+#script_img2img_adetailer_ad_mask_max_ratio_2nd
+# ADetailer - 2nd tab - Mask Preprocessing
+#script_img2img_adetailer_ad_x_offset_2nd
+#script_img2img_adetailer_ad_y_offset_2nd
+#script_img2img_adetailer_ad_dilate_erode_2nd
+#script_img2img_adetailer_ad_mask_merge_invert_2nd
+# ADetailer - 2nd tab - Inpainting
+#script_img2img_adetailer_ad_mask_blur_2nd
+#script_img2img_adetailer_ad_denoising_strength_2nd
+#script_img2img_adetailer_ad_inpaint_full_res_2nd
+#script_img2img_adetailer_ad_inpaint_full_res_padding_2nd
+#script_img2img_adetailer_ad_use_inpaint_width_height_2nd
+#script_img2img_adetailer_ad_inpaint_width_2nd
+#script_img2img_adetailer_ad_inpaint_height_2nd
+#script_img2img_adetailer_ad_use_steps_2nd
+#script_img2img_adetailer_ad_steps_2nd
+#script_img2img_adetailer_ad_use_cfg_scale_2nd
+#script_img2img_adetailer_ad_cfg_scale_2nd
+#script_img2img_adetailer_ad_restore_face_2nd
+# ADetailer - 2nd tab - ADetailer ControlNet
+#script_img2img_adetailer_ad_controlnet_model_2nd
+#script_img2img_adetailer_ad_controlnet_weight_2nd
+#script_img2img_adetailer_ad_controlnet_guidance_start_2nd
+#script_img2img_adetailer_ad_controlnet_guidance_end_2nd
 """
 
         write_text_to_file(img2img_custom_tracked_components_ids, CONFIG_IMG2IMG_CUSTOM_TRACKED_COMPONENTS_FILE_NAME)
@@ -158,120 +496,102 @@ def load_txt2img_config_file():
         # First time running the extension or it was deleted, so fill it with default values
         txt2img_config_presets = {
             "None": {},
-            "Low quality ------ 512x512, steps: 10, batch size: 8, DPM++ 2M Karras": {
-                "txt2img_sampling": "DPM++ 2M Karras",
-                "txt2img_steps": 10,
+            "SD 1.5 - 512x512": {
                 "txt2img_width": 512,
                 "txt2img_height": 512,
+            },
+            "SD 2.1 - 768x768": {
+                "txt2img_width": 768,
+                "txt2img_height": 768,
+            },
+            "SDXL --- 1024x1024": {
+                "txt2img_width": 1024,
+                "txt2img_height": 1024,
+            },
+            "Low quality ------ steps: 10, batch size: 8, DPM++ 2M Karras": {
+                "txt2img_sampling": "DPM++ 2M Karras",
+                "txt2img_steps": 10,
+                #"txt2img_width": 512,
+                #"txt2img_height": 512,
                 "txt2img_enable_hr": False,
                 "txt2img_batch_count": 1,
                 "txt2img_batch_size": 8,
-                # "txt2img_cfg_scale": 7,
+                #"txt2img_cfg_scale": 7,
             },
-            "Medium quality - 512x512, steps: 15, batch size: 4, DPM++ 2M Karras": {
+            "Medium quality - steps: 15, batch size: 4, DPM++ 2M Karras": {
                 "txt2img_sampling": "DPM++ 2M Karras",
                 "txt2img_steps": 15,
-                "txt2img_width": 512,
-                "txt2img_height": 512,
+                #"txt2img_width": 512,
+                #"txt2img_height": 512,
                 "txt2img_enable_hr": False,
                 "txt2img_batch_count": 1,
                 "txt2img_batch_size": 4,
-                # "txt2img_cfg_scale": 7,
+                #"txt2img_cfg_scale": 7,
             },
-            "High quality ------ 512x512, steps: 20, batch size: 4, DPM++ 2S a Karras": {
+            "High quality ------ steps: 20, batch size: 4, DPM++ 2S a Karras": {
                 "txt2img_sampling": "DPM++ 2S a Karras",
                 "txt2img_steps": 20,
-                "txt2img_width": 512,
-                "txt2img_height": 512,
+                #"txt2img_width": 512,
+                #"txt2img_height": 512,
                 "txt2img_enable_hr": False,
                 "txt2img_batch_count": 1,
                 "txt2img_batch_size": 4,
-                # "txt2img_cfg_scale": 7,
+                #"txt2img_cfg_scale": 7,
             },
-            "Low quality ------ 768x768, steps: 10, batch size: 8, DPM++ 2M Karras": {
-                "txt2img_sampling": "DPM++ 2M Karras",
-                "txt2img_steps": 10,
-                "txt2img_width": 768,
-                "txt2img_height": 768,
-                "txt2img_enable_hr": False,
-                "txt2img_batch_count": 1,
-                "txt2img_batch_size": 8,
-                # "txt2img_cfg_scale": 7,
-            },
-            "Medium quality - 768x768, steps: 15, batch size: 4, DPM++ 2M Karras": {
-                "txt2img_sampling": "DPM++ 2M Karras",
-                "txt2img_steps": 15,
-                "txt2img_width": 768,
-                "txt2img_height": 768,
-                "txt2img_enable_hr": False,
-                "txt2img_batch_count": 1,
-                "txt2img_batch_size": 4,
-                # "txt2img_cfg_scale": 7,
-            },
-            "High quality ------ 768x768, steps: 20, batch size: 4, DPM++ 2S a Karras": {
-                "txt2img_sampling": "DPM++ 2S a Karras",
-                "txt2img_steps": 20,
-                "txt2img_width": 768,
-                "txt2img_height": 768,
-                "txt2img_enable_hr": False,
-                "txt2img_batch_count": 1,
-                "txt2img_batch_size": 4,
-                # "txt2img_cfg_scale": 7,
-            },
-            "High res -------- 1024x1024, steps: 30, batch size: 1, DPM++ 2M Karras, [Upscale by: 2, Denoising: 0.4, Hires steps: 10]": {
+            "High res -------- steps: 30, DPM++ 2M Karras, [Hires fix - Upscale by: 2, Denoising: 0.4, Hires steps: 10]": {
                 "txt2img_steps": 30,
                 "txt2img_sampling": "DPM++ 2M Karras",
-                "txt2img_width": 512,
-                "txt2img_height": 512,
+                #"txt2img_width": 512,
+                #"txt2img_height": 512,
                 "txt2img_enable_hr": True,
                 "txt2img_hr_scale": 2,
                 "txt2img_hires_steps": 10,
                 "txt2img_denoising_strength": 0.4,
-                "txt2img_batch_count": 1,
-                "txt2img_batch_size": 1,
-                # "txt2img_cfg_scale": 7,
+                #"txt2img_batch_count": 1,
+                #"txt2img_batch_size": 1,
+                #"txt2img_cfg_scale": 7,
             },
-            "1080p ----------- 1920x1080, steps: 20, batch size: 1, DPM++ 2S a Karras, [Upscale by: 2.5, Denoising: 0.4, Hires steps: 10]": {
+            "1080p ----------- 432x768 -> 1920x1080, steps: 20, DPM++ 2M Karras, [Hires fix - Upscale by: 2.5, Denoising: 0.4, Hires steps: 10]": {
                 # 2x 960x536, 2.5x 768x432, 3x 640x360
                 "txt2img_steps": 20,
-                "txt2img_sampling": "DPM++ 2S a Karras",
+                "txt2img_sampling": "DPM++ 2M Karras",
                 "txt2img_width": 768,
                 "txt2img_height": 432,
                 "txt2img_enable_hr": True,
                 "txt2img_hr_scale": 2.5,
                 "txt2img_hires_steps": 10,
                 "txt2img_denoising_strength": 0.4,
-                "txt2img_batch_count": 1,
-                "txt2img_batch_size": 1,
-                # "txt2img_cfg_scale": 7,
+                #"txt2img_batch_count": 1,
+                #"txt2img_batch_size": 1,
+                #"txt2img_cfg_scale": 7,
             },
-            "1440p ----------- 2560x1440, steps: 25, batch size: 1, DPM++ 2S a Karras, [Upscale by: 3.3334, Denoising: 0.3, Hires steps: 10]": {
+            "1440p ----------- 432x768 -> 2560x1440, steps: 25, DPM++ 2M Karras, [Hires fix - Upscale by: 3.3334, Denoising: 0.3, Hires steps: 10]": {
                 # 2x 1024x720, 2.5x 1024x576, 3.3334x 768x432, 4x 640x360
                 "txt2img_steps": 25,
-                "txt2img_sampling": "DPM++ 2S a Karras",
+                "txt2img_sampling": "DPM++ 2M Karras",
                 "txt2img_width": 768,
                 "txt2img_height": 432,
                 "txt2img_enable_hr": True,
                 "txt2img_hr_scale": 3.3334,
                 "txt2img_hires_steps": 10,
-                "txt2img_denoising_strength": 0.3,
-                "txt2img_batch_count": 1,
-                "txt2img_batch_size": 1,
-                # "txt2img_cfg_scale": 7,
+                "txt2img_denoising_strength": 0.4,
+                #"txt2img_batch_count": 1,
+                #"txt2img_batch_size": 1,
+                #"txt2img_cfg_scale": 7,
             },
-            "4k ---------------- 3840x2160, steps: 30, batch size: 1, DPM++ 2S a Karras, [Upscale by: 5, Denoising: 0.3, Hires steps: 15]": {
+            "4k ---------------- 432x768 -> 3840x2160, steps: 30, DPM++ 2M Karras, [Upscale by: 5, Denoising: 0.3, Hires steps: 15]": {
                 # 2x 1420x1080, 2.5x 1536x864, 3x 1280x720, 5x 768x432, 6x 640x360
                 "txt2img_steps": 30,
-                "txt2img_sampling": "DPM++ 2S a Karras",
+                "txt2img_sampling": "DPM++ 2M Karras",
                 "txt2img_width": 768,
                 "txt2img_height": 432,
                 "txt2img_enable_hr": True,
                 "txt2img_hr_scale": 5,
                 "txt2img_hires_steps": 15,
-                "txt2img_denoising_strength": 0.3,
-                "txt2img_batch_count": 1,
-                "txt2img_batch_size": 1,
-                # "txt2img_cfg_scale": 7,
+                "txt2img_denoising_strength": 0.4,
+                #"txt2img_batch_count": 1,
+                #"txt2img_batch_size": 1,
+                #"txt2img_cfg_scale": 7,
             },
         }
 
@@ -291,34 +611,34 @@ def load_img2img_config_file():
         # First time running the extension or it was deleted, so fill it with default values
         img2img_config_presets = {
             "None": {},
-            "Low denoising ------- 512x512, denoising: 0.25, steps: 10, DPM++ 2M Karras": {
-                "img2img_sampling": "DPM++ 2M Karras",
-                "img2img_steps": 10,
-                "img2img_width": 512,
-                "img2img_height": 512,
-                # "img2img_batch_count": 1,
-                # "img2img_batch_size": 1,
-                # "img2img_cfg_scale": 7,
-                "img2img_denoising_strength": 0.25,
-            },
-            "Medium denoising -- 512x512, denoising: 0.50, steps: 15, DPM++ 2M Karras": {
-                "img2img_sampling": "DPM++ 2M Karras",
-                "img2img_steps": 15,
-                "img2img_width": 512,
-                "img2img_height": 512,
-                # "img2img_batch_count": 1,
-                # "img2img_batch_size": 1,
-                # "img2img_cfg_scale": 7,
-                "img2img_denoising_strength": 0.50,
-            },
-            "High denoising ------- 512x512, denoising: 0.75, steps: 20, DPM++ 2M Karras": {
+            "Low denoising ------- denoising: 0.25, steps: 20, DPM++ 2M Karras": {
                 "img2img_sampling": "DPM++ 2M Karras",
                 "img2img_steps": 20,
-                "img2img_width": 512,
-                "img2img_height": 512,
-                # "img2img_batch_count": 1,
-                # "img2img_batch_size": 1,
-                # "img2img_cfg_scale": 7,
+                #"img2img_width": 512,
+                #"img2img_height": 512,
+                #"img2img_batch_count": 1,
+                #"img2img_batch_size": 1,
+                #"img2img_cfg_scale": 7,
+                "img2img_denoising_strength": 0.25,
+            },
+            "Medium denoising -- denoising: 0.40, steps: 20, DPM++ 2M Karras": {
+                "img2img_sampling": "DPM++ 2M Karras",
+                "img2img_steps": 20,
+                #"img2img_width": 512,
+                #"img2img_height": 512,
+                #"img2img_batch_count": 1,
+                #"img2img_batch_size": 1,
+                #"img2img_cfg_scale": 7,
+                "img2img_denoising_strength": 0.40,
+            },
+            "High denoising ------- denoising: 0.75, steps: 30, DPM++ 2M Karras": {
+                "img2img_sampling": "DPM++ 2M Karras",
+                "img2img_steps": 30,
+                #"img2img_width": 512,
+                #"img2img_height": 512,
+                #"img2img_batch_count": 1,
+                #"img2img_batch_size": 1,
+                #"img2img_cfg_scale": 7,
                 "img2img_denoising_strength": 0.75,
             },
         }
@@ -328,6 +648,20 @@ def load_img2img_config_file():
 
     return img2img_config_presets
 
+
+# workaround function for not being able to select new dropdown values after new choices are added to the dropdown in Gradio v3.28.1 (Automatic1111 v1.1.0)
+# it's possible they will fix this in Gradio v4
+# see: https://github.com/Zyin055/Config-Presets/pull/41
+#def get_config_preset_dropdown_choices(new_config_presets) -> list[str]:
+def get_config_preset_dropdown_choices(new_config_presets: list[str]) -> list[str]:
+    new_choices = []
+    if len(new_config_presets) > 0:
+        # if isinstance(new_config_presets, dict):
+        #     new_choices.extend(new_config_presets.keys())
+        # else: # List assumed.
+        #     new_choices.extend(new_config_presets)
+        new_choices.extend(new_config_presets)
+    return new_choices
 
 
 class Script(scripts.Script):
@@ -412,6 +746,8 @@ class Script(scripts.Script):
         #if component.elem_id == "script_list": #bottom of the script dropdown
         #if component.elem_id == "txt2img_style2_index": #doesn't work, need to be added after all the components we edit are loaded
         #if component.elem_id == "open_folder": #bottom of the image gallery
+        #if component.elem_id == "txt2img_results" or component.elem_id == "img2img_results": #bottom of the image gallery, doesn't work
+        #if component.elem_id == "txt2img_gallery_container" or component.elem_id == "img2img_gallery_container": #bottom of the image gallery, doesn't work
         if component.elem_id == "txt2img_generation_info_button" or component.elem_id == "img2img_generation_info_button": #very bottom of the txt2img/img2img image gallery
 
             #print("Creating dropdown values...")
@@ -420,7 +756,14 @@ class Script(scripts.Script):
             for component_name, component in component_map.items():
                 #print(component_name, component_type)
                 if component is None:
-                    print(f"[ERROR][Config-Presets] The component '{component_name}' could not be processed. This may be because you are running an outdated version of the Config-Presets extension, or you included a component ID in the custom tracked components config file that does not exist or is an invalid component. This extension will not work until this issue is resolved.")
+                    log_error(f"The {'txt2img' if self.is_txt2img else 'img2img'} component '{component_name}' could not be processed. This may be because you are running an outdated version of the Config-Presets extension, or you included a component ID in the custom tracked components config file that does not exist, no longer exists (if you updated an extension), or is an invalid component (if this is the case, you need to manually edit the config file at {BASEDIR}\\{custom_tracked_components_config_file_name} or just delete it so it resets to defaults). This extension will not work until this issue is resolved.")
+
+                    if "controlnet_control_mod_radio" in component_name:
+                        # 5/26/2023 special error message for ControlNet users letting them know their config file has been automatically updated
+                        # https://github.com/Mikubill/sd-webui-controlnet/commit/0d1c252cad9c37a75e839d52f9ea8207adb8aa46
+                        replace_text_in_file("controlnet_control_mod_radio", "controlnet_control_mode_radio", custom_tracked_components_config_file_name)
+                        log(f"'{component_name}' is from an outdated version of the ControlNet extension. Your config file has been automatically fixed to replace it with the correct ID ('control_mode_radio'). Please reload the Web UI to load the fix.")
+
                     return
 
             # Mark components with type "index" to be transform
@@ -432,15 +775,16 @@ class Script(scripts.Script):
                     index_type_components.append(component.elem_id)
 
             preset_values = []
-            config_presets = None
+            config_presets: dict[str, any] = None
             if self.is_txt2img:
                 config_presets = self.txt2img_config_presets
             else:
                 config_presets = self.img2img_config_presets
 
-            for dropdownValue in config_presets:
-                preset_values.append(dropdownValue)
-                #print(f"Config Presets: added \"{dropdownValue}\"")
+            preset_values: list[str] = list(config_presets.keys())
+            # for dropdownValue in config_presets:
+            #     preset_values.append(dropdownValue)
+            #     #print(f"Config Presets: added \"{dropdownValue}\"")
 
             fields_checkboxgroup = gr.CheckboxGroup(choices=component_ids,
                                                     value=component_ids,    #check all checkboxes by default
@@ -476,7 +820,8 @@ class Script(scripts.Script):
 
                         config_preset_dropdown = gr.Dropdown(
                             label="Config Presets",
-                            choices=preset_values,
+                            #choices=preset_values,
+                            choices=get_config_preset_dropdown_choices(preset_values),
                             elem_id="config_preset_txt2img_dropdown" if self.is_txt2img else "config_preset_img2img_dropdown",
                         )
                         config_preset_dropdown.style(container=False) #set to True to give it a white box to sit in
@@ -493,7 +838,7 @@ class Script(scripts.Script):
                                 )
                         except AttributeError:
                             print(traceback.format_exc())   # prints the exception stacktrace
-                            print("[ERROR][CRITICAL][Config-Presets] The Config-Presets extension encountered a fatal error. A component required by this extension no longer exists in the Web UI. This is most likely due to the A1111 Web UI being updated. Try updating the Config-Presets extension. If that doesn't work, please post a bug report at https://github.com/Zyin055/Config-Presets/issues and delete your extensions/Config-Presets folder until an update is published.")
+                            log_critical_error("The Config-Presets extension encountered a fatal error. A component required by this extension no longer exists in the Web UI. This is most likely due to the A1111 Web UI being updated. Try updating the Config-Presets extension. If that doesn't work, please post a bug report at https://github.com/Zyin055/Config-Presets/issues and delete your extensions/Config-Presets folder until an update is published.")
 
                         # No longer needed after the bump to Gradio 3.23
                         # config_preset_dropdown.change(
@@ -509,16 +854,19 @@ class Script(scripts.Script):
                                 def delete_selected_preset(config_preset_name):
                                     if config_preset_name in config_presets.keys():
                                         del config_presets[config_preset_name]
-                                        print(f'Config Presets: deleted "{config_preset_name}"')
+                                        print(f'[Config-Presets] deleted: "{config_preset_name}"')
 
                                         write_json_to_file(config_presets, config_file_name)
 
                                         preset_keys = list(config_presets.keys())
-                                        return gr.Dropdown.update(value=preset_keys[len(preset_keys)-1], choices=preset_keys)
+                                        return gr.Dropdown.update(value=preset_keys[len(preset_keys)-1],
+                                                                  #choices=preset_values,
+                                                                  choices=get_config_preset_dropdown_choices(preset_keys),
+                                                                  )
                                     return gr.Dropdown.update() # do nothing if no value is selected
 
                                 trash_button = gr.Button(
-                                    value="\U0001F5D1",
+                                    value="\U0001f5d1\ufe0f", #🗑
                                     elem_id="script_config_preset_trash_button",
                                 )
                                 trash_button.click(
@@ -580,7 +928,7 @@ class Script(scripts.Script):
                             with gr.Column(scale=2, min_width=200):
                                 save_button = gr.Button(
                                     # value="Create",
-                                    value="💾 Save & Restart",
+                                    value="💾 Save",
                                     variant="primary",
                                     elem_id="script_config_preset_save_button",
                                 )
@@ -591,36 +939,37 @@ class Script(scripts.Script):
                                         [save_textbox] + [fields_checkboxgroup] + [component_map[comp_name] for comp_name in
                                                                                    component_ids if
                                                                                    component_map[comp_name] is not None]),
-                                    # outputs=[config_preset_dropdown, save_textbox],
-                                )
-                                save_button.click(  # need this to runa after save_config()
-                                    fn=None,
-                                    _js="config_preset_settings_restart_gradio()",  # restart Gradio
+                                    outputs=[config_preset_dropdown, save_textbox],
                                 )
 
-                                def add_remove_button_click():
+                                def add_remove_button_click(save_textbox_text: str, config_preset_dropdown_value: str):
+                                    if save_textbox_text == "" or save_textbox_text is None:
+                                        if config_preset_dropdown_value != "" and config_preset_dropdown_value is not None:
+                                            # save textbox is empty, and we have a dropdown value selected
+                                            # auto-populate the save textbox so it's easier to overwrite existing config preset
+                                            return gr.Textbox.update(value=config_preset_dropdown_value)
+                                    return gr.Textbox.update()
+
+
+                                def expand_edit_ui():
                                     return gr.update(visible=True), gr.update(visible=True), gr.update(visible=False)
 
-                                # def save_button_click(save_text):
-                                #     if save_text == "":
-                                #         return gr.update(), gr.update()
-                                #     return gr.update(visible=True), gr.update(visible=False)
-
-                                def cancel_button_click():
+                                def collapse_edit_ui():
                                     return gr.update(visible=False), gr.update(visible=False), gr.update(visible=True)
 
                                 add_remove_button.click(
                                     fn=add_remove_button_click,
+                                    inputs=[save_textbox, config_preset_dropdown],
+                                    outputs=[save_textbox],
+                                )
+                                add_remove_button.click(
+                                    fn=expand_edit_ui,
                                     inputs=[],
                                     outputs=[collapsable_column, collapsable_row, add_remove_button_column],
                                 )
-                                # save_button.click(
-                                #     fn=save_button_click,
-                                #     inputs=[save_textbox],
-                                #     outputs=[add_remove_button_column, collapsable_column],
-                                # )
+
                                 cancel_button.click(
-                                    fn=cancel_button_click,
+                                    fn=collapse_edit_ui,
                                     inputs=[],
                                     outputs=[collapsable_column, collapsable_row, add_remove_button_column],
                                 )
@@ -695,14 +1044,11 @@ def save_config(config_presets, component_map, config_file_name):
         # print(f"self.txt2img_config_preset_dropdown.choices after =\n{self.txt2img_config_preset_dropdown.choices}")
 
         print(f"[Config-Presets] Added new preset: {new_setting_name}")
-        print(f"[Config-Presets] Restarting UI...") # done in _js
-        # update the dropdown with the new config preset, and clear the 'new preset name' textbox
-        return gr.Dropdown.update(value=new_setting_name, choices=list(config_presets.keys())), ""
-
-        # this errors when adding a 2nd config preset
-        # the solution is supposed to be updating the backend Gradio object to reflect the frontend dropdown values, but it doesn't work. still throws: "ValueError: 0 is not in list"
-        # workaround is to restart the whole UI after creating a new config preset by clicking the "Restart Gradio and Refresh Components" button in javascript
-        # https://github.com/gradio-app/gradio/discussions/2848
+        #print(f"[Config-Presets] Restarting UI...") # done in _js
+        return gr.Dropdown.update(value=new_setting_name,   # update the dropdown with the new config preset
+                                  #choices=list(config_presets.keys()),
+                                  choices=get_config_preset_dropdown_choices(config_presets.keys()),
+                                  ), "" # clear the 'New preset name' textbox
 
     return func
 
@@ -715,3 +1061,23 @@ def write_json_to_file(json_data, file_name: str):
 def write_text_to_file(text, file_name: str):
     with open(f"{BASEDIR}/{file_name}", "w") as file:
         file.write(text)
+
+
+def replace_text_in_file(old: str, new: str, file_name: str):
+    with open(f"{BASEDIR}/{file_name}", "r") as file:
+        content = file.read()
+
+    with open(f"{BASEDIR}/{file_name}", "w") as file:
+        file.write(content.replace(old, new))
+
+
+def log(text: str):
+    print(f"[Config Presets] {text}")
+
+
+def log_error(text: str):
+    print(f"[ERROR][Config Presets] {text}")
+
+
+def log_critical_error(text: str):
+    print(f"[ERROR][CRITICAL][Config Presets] {text}")

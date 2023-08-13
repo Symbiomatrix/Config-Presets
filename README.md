@@ -1,7 +1,7 @@
 ## What does this do?
 This [Automatic1111](https://github.com/AUTOMATIC1111/stable-diffusion-webui) extension adds a configurable dropdown to allow you to change settings in the txt2img and img2img tabs of the Web UI.
 
-This allows you to do things like swap from low quality rendering settings to high quality. Or apply hires settings that uses your favorite anime upscaler. Or set image dimensions to make a wallpaper. You can even use it to set custom script fields like XYZ plot values.
+This allows you to do things like swap from low quality rendering settings to high quality. Or apply hires settings that uses your favorite anime upscaler. Or set image dimensions to make a wallpaper. You can even use it to set custom script fields like XYZ plot values or ControlNet values.
 
 ## Screenshots
 The new dropdown in the image gallery.
@@ -28,13 +28,15 @@ Screenshot of config-txt2img.json, which can be opened with the "Open config fil
 * Git clone this repo to the `extensions` folder in your Stable Diffusion installation
 
 ## Known bugs
-* [v1.1.0](https://github.com/AUTOMATIC1111/stable-diffusion-webui/releases/tag/v1.1.0) causes the script dropdown to not be auto changed when `script_list` is a tracked component
-* [Can't fix] Updating from an old version (before 12/21/2022 update) will wipe your custom config presets
+* Automatic1111 [v1.1.0](https://github.com/AUTOMATIC1111/stable-diffusion-webui/releases/tag/v1.1.0)+ causes dropdown change events to not occur. This affects components such as the script_list dropdown, XYZ plot dropdowns, and ControlNet model/preprocessor dropdowns, and likely others. The workaround is to manually reselect the value in the dropdown list.
+  * This is fixed in Automatic1111 [v1.4.0-RC](https://github.com/AUTOMATIC1111/stable-diffusion-webui/releases/tag/v1.4.0-RC). Gradio 3.32 seems to fix this issue
 
 ## Changelog
 <details>
     <summary>Click to view Changelog</summary>
     
+#### 5/15/2023
+* The UI no longer needs to be reloaded when creating a new config preset
 #### 4/29/2023
 * Updated for the March 29th Automatic1111 version which uses Gradio 3.23
 * Added the ability to add almost any field on the UI to a config preset with the "Add tracked fields..." button
